@@ -1,0 +1,20 @@
+<div class="video-container">
+    <video #video1 width="400" height="220" controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <video #video2 width="400" height="220" controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="controls">
+    <button (click)="startVideo()">Start</button>
+    <button (click)="stopVideo()">Stop</button>
+    <button (click)="toggleVideo()">Toggle</button>
+  </div>
+  <p>Video 1 Current Time: <span>{{ video1Time | number: '1.2-2' }}</span> seconds</p>
+  <p>Video 2 Current Time: <span>{{ video2Time | number: '1.2-2' }}</span> seconds</p>
+  <div class="plot-container">
+    <div id="plot"></div>
+  </div>
