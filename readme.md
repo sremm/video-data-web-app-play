@@ -1,4 +1,4 @@
-thoughts for this play project
+# thoughts for this play project
 
 creating some video data display web app in different ways.
 eg. vanilla js and html
@@ -8,10 +8,16 @@ eg. vanilla js and html
 - with vue
 - with svelte
 
-ideas for the app
-display 2 videos - eg 2 different toss blocks
-click a button and play both
-have a graph that displays some data eg, head position with a synchronised line matching part in video
+## The app
 
-v1 display 2 videos with some controls to control both.
--> was quite simple just in html and loading public videos
+- display 2 videos
+- click a button and play both
+- have a graph that displays some data eg, head position with a synchronised vertical line matching part in video
+
+# Notes while doing it
+
+## Vanilla HTML and JavaScript
+
+Started off with just html and javascript. Mostly used copilot prompts to code up the thing. To my surprise, everything was quite straightforward. With just 100 lines of code, we have.
+
+![alt text](html-js.gif)
