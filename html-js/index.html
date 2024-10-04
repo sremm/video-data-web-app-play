@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Component</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .plot-container {
+            width: 600px; /* Example width */
+            height: 400px; /* Example height */
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const videoWidth = 400;
+        const videoHeight = 220;
+    </script>
+    <div class="video-container">
+        <video width="${videoWidth}" height="${videoHeight}" controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video width="${videoWidth}" height="${videoHeight}" controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="controls">
+        <button onclick="startVideo()">Start</button>
+        <button onclick="stopVideo()">Stop</button>
+        <button onclick="toggleVideo()">Toggle</button>
+    </div>
+    <p>Video 1 Current Time: <span id="video1-time">0</span> seconds</p>
+    <p>Video 2 Current Time: <span id="video2-time">0</span> seconds</p>
+    <script>
+        const videos = document.querySelectorAll('video');
+
+        function startVideo() {
+            videos.forEach(video => video.play());
+        }
+
+        function stopVideo() {
+            videos.forEach(video => video.pause());
+        }
+
+        function toggleVideo() {
+            videos.forEach(video => {
+                if (video.paused) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
+        }
+
+        function updateVideoTimes() {
+            document.getElementById('video1-time').textContent = videos[0].currentTime.toFixed(2);
+            document.getElementById('video2-time').textContent = videos[1].currentTime.toFixed(2);
+            updateVerticalLine(videos[0].currentTime);
+            requestAnimationFrame(updateVideoTimes);
+        }
+
+        function updateVerticalLine(currentTime) {
+            Plotly.relayout(plotDiv, {
+                'shapes[0].x0': currentTime,
+                'shapes[0].x1': currentTime
+            });
+        }
+
+        requestAnimationFrame(updateVideoTimes);
+    </script>
+    <div class="plot-container">
+        <div id="plot"></div>
+    </div>
+    <script>
+        // Initialize Plotly plot
+        const plotDiv = document.getElementById('plot');
+        const trace = {
+            x: Array.from({length: 301}, (_, i) => i / 30), // x-axis data from 0 to 10 seconds at 30 fps
+            y: Array.from({length: 301}, (_, i) => Math.sin(i / 30 * 2 * Math.PI)), // y-axis data representing some head position changes
+            mode: 'lines',
+            name: 'Head Position'
+        };
+        const data = [trace];
+        const layout = {
+            title: 'Head Position Over Time',
+            xaxis: { title: 'Time (s)' },
+            yaxis: { title: 'Position' },
+            shapes: [{
+                type: 'line',
+                x0: 0,
+                x1: 0,
+                y0: -1,
+                y1: 1,
+                line: {
+                    color: 'red',
+                    width: 2
+                }
+            }]
+        };
+        Plotly.newPlot(plotDiv, data, layout);
+    </script>
+</body>
+</html>
