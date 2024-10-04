@@ -21,3 +21,11 @@ eg. vanilla js and html
 Started off with just html and javascript. Mostly used copilot prompts to code up the thing. To my surprise, everything was quite straightforward. With just 100 lines of code, we have.
 
 ![alt text](html-js.gif)
+
+## Angular version
+
+Started off with giving chat gpt the html file as context and prompted it with `I want to now implement the same functionality in angular. I have angular cli instlled`
+
+Looked promising, but started getting some errors. First I needed to install more things -> plotly angular, importing plotly had to be different.
+
+When that was fixed, I started getting type errors, need to see whats up.
