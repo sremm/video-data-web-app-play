@@ -29,3 +29,9 @@ Started off with giving chat gpt the html file as context and prompted it with `
 Looked promising, but started getting some errors. First I needed to install more things -> plotly angular, importing plotly had to be different.
 
 When that was fixed, I started getting type errors, need to see whats up.
+
+day 2 - tried to fix some type errors and add missing imports, but still problems,
+-> try to use the angular-plotly component
+
+trying to create default projects and follow the minimal example, perhaps the server-side rendering support was causing trouble?
+-> it was server side rendering where the plotly import failed
