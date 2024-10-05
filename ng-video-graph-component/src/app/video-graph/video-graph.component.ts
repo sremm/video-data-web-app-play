@@ -1,13 +1,18 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import * as Plotly from 'plotly.js-dist-min';
+import { CommonModule } from '@angular/common';
 import { PlotlyModule } from 'angular-plotly.js';
 
+if (typeof self === 'undefined') {
+  (global as any).self = global;
+}
+import * as Plotly from 'plotly.js-dist-min';
 PlotlyModule.plotlyjs = Plotly;
 
 @Component({
   selector: 'app-video-graph',
   templateUrl: './video-graph.component.html',
   styleUrls: ['./video-graph.component.scss'],
+  imports: [CommonModule],
   standalone: true
 })
 export class VideoGraphComponent implements AfterViewInit {
@@ -56,10 +61,11 @@ export class VideoGraphComponent implements AfterViewInit {
   }
 
   updateVerticalLine(currentTime: number) {
-    Plotly.relayout(this.plotDiv, {
+    const update = {
       'shapes[0].x0': currentTime,
       'shapes[0].x1': currentTime
-    });
+    } as unknown as Plotly.Layout;
+    Plotly.relayout(this.plotDiv, update);
   }
 
   initializePlot() {
@@ -84,8 +90,8 @@ export class VideoGraphComponent implements AfterViewInit {
           color: 'red',
           width: 2
         }
-      }]
-    };
+      }] as Plotly.Shape[],
+    } as Plotly.Layout;
     Plotly.newPlot(this.plotDiv, data, layout);
   }
 }
