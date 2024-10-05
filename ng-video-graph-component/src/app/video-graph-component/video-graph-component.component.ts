@@ -26,7 +26,8 @@ export class VideoGraphComponent implements AfterViewInit {
   async ngAfterViewInit() {
 
       this.plotDiv = document.getElementById('plot');
-      this.initializePlot();
+
+      // this.initializePlot();
       requestAnimationFrame(this.updateVideoTimes.bind(this));
       
   }
@@ -58,7 +59,7 @@ export class VideoGraphComponent implements AfterViewInit {
   updateVideoTimes() {
     this.video1Time = this.video1.nativeElement.currentTime;
     this.video2Time = this.video2.nativeElement.currentTime;
-    this.updateVerticalLine(this.video1.nativeElement.currentTime);
+    // this.updateVerticalLine(this.video1.nativeElement.currentTime);
     requestAnimationFrame(this.updateVideoTimes.bind(this));
   }
 
