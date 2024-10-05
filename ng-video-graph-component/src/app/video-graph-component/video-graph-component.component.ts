@@ -1,18 +1,17 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 
-if (typeof self === 'undefined') {
-  (global as any).self = global;
-}
-import * as Plotly from 'plotly.js-dist-min';
-PlotlyModule.plotlyjs = Plotly;
+PlotlyModule.plotlyjs = PlotlyJS;
+
 
 @Component({
   selector: 'app-video-graph',
-  templateUrl: './video-graph.component.html',
-  styleUrls: ['./video-graph.component.scss'],
-  imports: [CommonModule],
+  templateUrl: './video-graph-component.component.html',
+  styleUrls: ['./video-graph-component.component.scss'],
+  imports: [CommonModule, PlotlyModule],
   standalone: true
 })
 export class VideoGraphComponent implements AfterViewInit {
@@ -22,11 +21,14 @@ export class VideoGraphComponent implements AfterViewInit {
   video1Time: number = 0;
   video2Time: number = 0;
   plotDiv: any;
+  graph: any;
 
-  ngAfterViewInit() {
-    this.plotDiv = document.getElementById('plot');
-    this.initializePlot();
-    requestAnimationFrame(this.updateVideoTimes.bind(this));
+  async ngAfterViewInit() {
+
+      this.plotDiv = document.getElementById('plot');
+      this.initializePlot();
+      requestAnimationFrame(this.updateVideoTimes.bind(this));
+      
   }
 
   startVideo() {
@@ -65,7 +67,7 @@ export class VideoGraphComponent implements AfterViewInit {
       'shapes[0].x0': currentTime,
       'shapes[0].x1': currentTime
     } as unknown as Plotly.Layout;
-    Plotly.relayout(this.plotDiv, update);
+    PlotlyModule.plotlyjs.relayout(this.plotDiv, update);
   }
 
   initializePlot() {
@@ -90,8 +92,8 @@ export class VideoGraphComponent implements AfterViewInit {
           color: 'red',
           width: 2
         }
-      }] as Plotly.Shape[],
-    } as Plotly.Layout;
-    Plotly.newPlot(this.plotDiv, data, layout);
+      }] ,
+    } ;
+    this.graph = {data: data, layout: layout} ;
   }
 }
