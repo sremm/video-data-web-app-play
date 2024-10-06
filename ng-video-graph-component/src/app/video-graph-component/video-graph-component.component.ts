@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
@@ -14,52 +14,57 @@ PlotlyModule.plotlyjs = PlotlyJS;
   imports: [CommonModule, PlotlyModule],
   standalone: true
 })
-export class VideoGraphComponent implements AfterViewInit {
-  @ViewChild('video1') video1!: ElementRef<HTMLVideoElement>;
-  @ViewChild('video2') video2!: ElementRef<HTMLVideoElement>;
+export class VideoGraphComponent implements AfterViewInit, OnInit{
 
   video1Time: number = 0;
   video2Time: number = 0;
   plotDiv: any;
-  graph: any;
+  private video1: any;
+  private video2: any;
 
-  async ngAfterViewInit() {
+  async ngOnInit() {
 
       this.plotDiv = document.getElementById('plot');
-
-      // this.initializePlot();
+      this.video1 = document.getElementById('video1') as HTMLVideoElement;
+      this.video2 = document.getElementById('video2') as HTMLVideoElement;
+      this.initializePlot();
       requestAnimationFrame(this.updateVideoTimes.bind(this));
       
   }
 
+  async ngAfterViewInit() {
+    // this.initializePlot();
+    // requestAnimationFrame(this.updateVideoTimes.bind(this));
+  }
+
   startVideo() {
-    this.video1.nativeElement.play();
-    this.video2.nativeElement.play();
+    this.video1.play();
+    this.video2.play();
   }
 
   stopVideo() {
-    this.video1.nativeElement.pause();
-    this.video2.nativeElement.pause();
+    this.video1.pause();
+    this.video2.pause();
   }
 
   toggleVideo() {
-    if (this.video1.nativeElement.paused) {
-      this.video1.nativeElement.play();
+    if (this.video1.paused) {
+      this.video1.play();
     } else {
-      this.video1.nativeElement.pause();
+      this.video1.pause();
     }
 
-    if (this.video2.nativeElement.paused) {
-      this.video2.nativeElement.play();
+    if (this.video2.paused) {
+      this.video2.play();
     } else {
-      this.video2.nativeElement.pause();
+      this.video2.pause();
     }
   }
 
   updateVideoTimes() {
-    this.video1Time = this.video1.nativeElement.currentTime;
-    this.video2Time = this.video2.nativeElement.currentTime;
-    // this.updateVerticalLine(this.video1.nativeElement.currentTime);
+    this.video1Time = this.video1.currentTime;
+    this.video2Time = this.video2.currentTime;
+    this.updateVerticalLine(this.video1.currentTime);
     requestAnimationFrame(this.updateVideoTimes.bind(this));
   }
 
@@ -93,8 +98,8 @@ export class VideoGraphComponent implements AfterViewInit {
           color: 'red',
           width: 2
         }
-      }] ,
+      }] as Plotly.Layout['shapes'],
     } ;
-    this.graph = {data: data, layout: layout} ;
+    PlotlyJS.newPlot(this.plotDiv, data, layout);
   }
 }
