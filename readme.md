@@ -5,9 +5,22 @@ creating some video data display web app in different ways.
 - vanilla js and html [done]
 - with angular [done]
 - with react [done]
-- with vue
-- with svelte
-- with react and typescript
+- with vue [done]
+- with svelte - skipping
+- with react and typescript - skipping
+
+- for taking into usage I think the priciple by choosing a popular one fits me well.
+  -> so react and try out firebase for deploying :)
+
+check out https://www.meteor.com/
+for deploying apps
+
+- https://firebase.google.com/ (on form is on firebase - web app with flutter) -> recommended by some dev's i know
+- https://www.heroku.com/pricing
+- https://docs.amplify.aws/angular/start/quickstart/
+
+- future project
+  - Toss analysis app, which reads as a step by step guide web page / blog post, but give interactivity with users own video and a reference video
 
 ## The app
 
@@ -51,3 +64,7 @@ the experience of getting it working in angular was way more painful, a steeper 
 Got it working, this time took a more step by step approach with information from copilot. Not sure if React was less of a hassle, or the approach.
 
 But since i used Javascript, I think it was more similar to html/js version. I also did not use too much of React style interactions, mainly just one big component, as I also had in Angular to be fair
+
+## Vue Version
+
+On paper the concept of how vue works is attractive, but now feels like it requires to get into a different mental state and still needs some learning of the concepts
