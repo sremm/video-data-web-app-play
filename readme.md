@@ -67,4 +67,14 @@ But since i used Javascript, I think it was more similar to html/js version. I a
 
 ## Vue Version
 
-On paper the concept of how vue works is attractive, but now feels like it requires to get into a different mental state and still needs some learning of the concepts
+On paper the concept of how vue works is attractive, but now feels like it requires to get into a different mental state and still needs some learning of the concepts.
+
+With help from copilot and some debugging i did get to the end.
+
+I kind of liked the single file style for these small things. But yes, with this short time I just relied on copilot a lot. I did not learn the ways of the framework.
+
+# Reflections
+
+Copilot works better on more popular libraries, so vanilla html/js was best, then react.
+
+For continuing with hobby projects, going with popular things is good, when the goal is to get to functionality fast. And not learning some stack in more depth.
